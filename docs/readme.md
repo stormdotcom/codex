@@ -1,3 +1,5 @@
+![Codex](./assets/logo.png)
+
 ```markdown
 # **Code X - Developer Documentation**
 
