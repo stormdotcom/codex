@@ -40,8 +40,8 @@ Code X is designed to:
 
 ### **Clone the Repository**
 ```bash
-git clone https://github.com/stormdotcom/code-assistance-vs-code.git
-cd code-assistance-vs-code
+git clone https://github.com/stormdotcom/codexe.git
+cd codexe
 ```
 
 ### **Install Dependencies**
@@ -66,7 +66,7 @@ npm run build
 The project is structured as follows:
 
 ```plaintext
-code-assistance-vs-code/
+codexe/
 ├── src/                     # Source code for the extension
 │   ├── extension.ts         # Main entry point for the extension
 │   ├── utils/               # Helper functions and utilities
@@ -218,5 +218,5 @@ We welcome contributions! Here's how you can help:
 
 ---
 
-For more details, visit the [GitHub repository](https://github.com/stormdotcom/code-assistance-vs-code). If you have questions or feature requests, open an issue or start a discussion!
+For more details, visit the [GitHub repository](https://github.com/stormdotcom/codex). If you have questions or feature requests, open an issue or start a discussion!
 ```
