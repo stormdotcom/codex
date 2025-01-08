@@ -1,5 +1,9 @@
 # **Code X - Developer Documentation**
-![Codex](../assets/logo.png)
+<p align="center">
+  <img src="../assets/logo.png" alt="Codex" />
+</p>
+
+
 This documentation provides detailed guidance for developers to contribute to and enhance the Code X VS Code extension. It covers the project structure, development setup, key components, and best practices for extending the functionality of Code X.
 
 ---
