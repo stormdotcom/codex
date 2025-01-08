@@ -1,8 +1,6 @@
-![Codex](./assets/logo.png)
-
 ```markdown
 # **Code X - Developer Documentation**
-
+![Codex](./assets/logo.png)
 This documentation provides detailed guidance for developers to contribute to and enhance the Code X VS Code extension. It covers the project structure, development setup, key components, and best practices for extending the functionality of Code X.
 
 ---
