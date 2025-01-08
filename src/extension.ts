@@ -15,7 +15,7 @@ export function activate(context: vscode.ExtensionContext) {
                 input: userCode,
             });
             const suggestion = response.data.suggestion;
-            vscode.window.showInformationMessage(`AI Suggestion: ${suggestion}`);
+            vscode.window.showInformationMessage(`AI Suggestion ֎: ${suggestion}`);
         } catch (error) {
             vscode.window.showErrorMessage('Error fetching suggestion!');
         }
