@@ -1,7 +1,8 @@
 {
-  "name": "codex-ai-assitant",
-  "displayName": "codex-ai-assitant",
-  "description": "",
+  "name": "codex-ai-assistant",
+  "displayName": "codex-ai-assistant",
+  "description": "Codex AI Assistant is a Visual Studio Code extension that integrates OpenAI's Codex to provide code suggestions, completions, and AI-driven programming assistance.",
+  "publisher": "Ajmal Nasumudeen",
   "repository": {
     "type": "git",
     "url": "https://github.com/stormdotcom/codex-extention.git"
@@ -10,8 +11,10 @@
   "engines": {
     "vscode": "^1.96.0"
   },
+  "icon": "assets/logo.png",
   "categories": [
-    "Other"
+    "AI",
+    "Chat"
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
