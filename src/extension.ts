@@ -1,41 +1,49 @@
-import axios from 'axios';
-import * as vscode from 'vscode';
+import * as vscode from "vscode";
 
-export function activate(context: vscode.ExtensionContext) {
-    const provider = vscode.languages.registerInlineCompletionItemProvider(
-        { scheme: 'file', language: '*' }, // Enable for all files
-        {
-            async provideInlineCompletionItems(document, position, context, token) {
-                const textBeforeCursor = document.getText(
-                    new vscode.Range(new vscode.Position(0, 0), position)
-                );
+import { matchSearchPhrase } from "./utils/matchSearchPhrase";
+import { search } from "./utils/search";
 
-                try {
-                    const response = await axios.post('http://localhost:8000/code-suggestions', {
-                        input: textBeforeCursor,
-                    });
+export function activate(_: vscode.ExtensionContext) {
+  const provider: vscode.CompletionItemProvider = {
+    // @ts-ignore
+    provideInlineCompletionItems: async (document, position, context, token) => {
+    // provideCompletionItems: async (document, position, context, token) => {
+      const textBeforeCursor = document.getText(
+        new vscode.Range(position.with(undefined, 0), position)
+      );
 
-                    const suggestion = response.data.suggestion;
+      const match = matchSearchPhrase(textBeforeCursor);
+      let items: any[] = [];
 
-                    if (suggestion) {
-                        return [
-                            new vscode.InlineCompletionItem(
-                                suggestion,
-                                new vscode.Range(position, position),
-                                suggestion
-                            ),
-                        ];
-                    }
-                } catch (error) {
-                    console.error('Error fetching suggestion:', error);
-                }
-
-                return [];
-            },
+      if (match) {
+        let rs;
+        try {
+          rs = await search(match.searchPhrase);
+          if (rs) {
+            items = rs.results.map((item) => {
+              const output = `\n${match.commentSyntax} Source: ${item.sourceURL} ${match.searchPhrase}\n${item.code}`;
+              return {
+                text: output,
+                insertText: output,
+                range: new vscode.Range(
+                  position.translate(0, output.length),
+                  position
+                ),
+              };
+            });
+          }
+        } catch (err: any) {
+          vscode.window.showErrorMessage(err.toString());
         }
-    );
+      }
+      return { items };
+    },
+  };
 
-    context.subscriptions.push(provider);
+  // @ts-ignore
+  vscode.languages.registerInlineCompletionItemProvider({ pattern: "**" }, provider);
 }
 
-export function deactivate() {}
+const startChars = ["<!--", "#", "//", "/*"];
+const keywords = ["find", "generate"];
+const triggerKeywords = startChars.map(s => keywords.map(k => [`${s} ${k}`, `${s}${k}`])).flat(2);

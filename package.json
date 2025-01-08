@@ -14,7 +14,12 @@
   "icon": "assets/logo128.png",
   "categories": [
     "AI",
-    "Chat"
+    "Chat",
+    "code-suggestion",
+    "copilot",
+    "code-inference",
+    "ai-programmer",
+    "pair-programmer"
   ],
   "activationEvents": [
     "onCommand:extension.generateCodeSuggestion"
@@ -41,29 +46,56 @@
     }
   ],
   "scripts": {
-    "vscode:prepublish": "npm run compile",
+
     "compile": "npm run release && tsc -p ./",
-    "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src",
-    "test": "vscode-test",
     "release": "standard-version",
-    "publish": "vsce login ajmal-nasumudeen && npm run release"
+    "publish": "vsce login ajmal-nasumudeen && npm run release",
+    "lint": "eslint . --ext .ts,.tsx",
+    "watch": "tsc -watch -p ./",
+    "download-api": "vscode-dts dev",
+    "postdownload-api": "vscode-dts main",
+    "postinstall": "npx vscode-dts dev",
+    "vscode:prepublish": "webpack --mode production",
+    "webpack": "webpack --mode development",
+    "webpack-dev": "webpack --mode development --watch",
+    "test-compile": "tsc -p ./",
+    "prebuild": "npm run lint -- --fix",
+    "build": "vsce package -o ./out-vsix",
+    "test": "jest"
   },
   "devDependencies": {
-    "@types/mocha": "^10.0.10",
-    "@types/node": "20.x",
-    "@types/vscode": "^1.96.0",
-    "@typescript-eslint/eslint-plugin": "^8.17.0",
-    "@typescript-eslint/parser": "^8.17.0",
-    "@vscode/test-cli": "^0.0.10",
-    "@vscode/test-electron": "^2.4.1",
-    "eslint": "^9.16.0",
-    "jest": "^29.7.0",
-    "standard-version": "^9.5.0",
-    "typescript": "^5.7.2"
+    "@types/jest": "^27.4.1",
+    "@types/node": "^14.15.0",
+    "@types/node-fetch": "^2.5.10",
+    "@typescript-eslint/eslint-plugin": "^4.16.0",
+    "@typescript-eslint/parser": "^4.16.0",
+    "bufferutil": "^4.0.3",
+    "esbuild": "^0.12.15",
+    "eslint": "^7.21.0",
+    "jest": "^27.5",
+    "node-loader": "^2.0.0",
+    "ts-jest": "^27.1.4",
+    "ts-loader": "^9.2.3",
+    "typescript": "^4.2.2",
+    "utf-8-validate": "^5.0.5",
+    "vsce": "^2.15.0",
+    "vscode": "^1.1.37",
+    "vscode-dts": "^0.3.3",
+    "webpack": "^5.76.0",
+    "webpack-cli": "^4.7.2"
   },
   "dependencies": {
-    "axios": "^1.7.9"
+    "@types/jsdom": "^16.2.12",
+    "canvas": "^2.11.2",
+    "jsdom": "^16.6.0",
+    "linkedom": "^0.11.1",
+    "node-fetch": "^2.6.1",
+    "openai": "^4.32.0",
+    "typescript-language-server": "^0.5.4"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
   }
 }
