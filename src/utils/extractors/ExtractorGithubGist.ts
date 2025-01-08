@@ -15,7 +15,7 @@ export default class ExtractorGithubGist extends ExtractorAbstract {
 
         const snippet = doc.querySelector("table.highlight")?.textContent;
 
-        if (!snippet || !isCodeValid(snippet)) return [];
+        if (!snippet || !isCodeValid(snippet)) {return [];}
 
         const socialCount = doc.querySelector(".social-count")?.textContent ?? "";
 

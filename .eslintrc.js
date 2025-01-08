@@ -1,7 +1,15 @@
 /**@type {import('eslint').Linter.Config} */
-// eslint-disable-next-line no-undef
+ 
 module.exports = {
   root: true,
+  env: {
+    node: true, 
+    es2021: true,
+  },
+  parserOptions: {
+    ecmaVersion: 12,
+    sourceType: 'module',
+  },
   parser: "@typescript-eslint/parser",
   plugins: ["@typescript-eslint"],
   extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],

@@ -1,4 +1,3 @@
-```markdown
 # **Code X - Developer Documentation**
 ![Codex](./assets/logo.png)
 This documentation provides detailed guidance for developers to contribute to and enhance the Code X VS Code extension. It covers the project structure, development setup, key components, and best practices for extending the functionality of Code X.
@@ -40,8 +39,8 @@ Code X is designed to:
 
 ### **Clone the Repository**
 ```bash
-git clone https://github.com/stormdotcom/codexe.git
-cd codexe
+git clone https://github.com/stormdotcom/codex.git
+cd codex
 ```
 
 ### **Install Dependencies**
@@ -66,7 +65,7 @@ npm run build
 The project is structured as follows:
 
 ```plaintext
-codexe/
+codex/
 ├── src/                     # Source code for the extension
 │   ├── extension.ts         # Main entry point for the extension
 │   ├── utils/               # Helper functions and utilities

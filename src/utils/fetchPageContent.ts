@@ -1,12 +1,15 @@
-const fetch = require("node-fetch").default;
+import fetch from "node-fetch";
 
 export type FetchPageResult = {
-  textContent: string;
-  url: string;
-};
+    textContent: string,
+    url: string
+}
 
 export function fetchPageTextContent(url: string): Promise<FetchPageResult> {
-  return fetch(url)
-    .then((rs: Response) => rs.text())
-    .then((textContent: string) => ({ textContent, url }));
+    return new Promise((resolve, reject) => {
+        return fetch(url)
+            .then(rs => rs.text())
+            .then(textContent => resolve({textContent, url}))
+            .catch(reject);
+    });
 }

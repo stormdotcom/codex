@@ -15,11 +15,8 @@
   "categories": [
     "AI",
     "Chat",
-    "code-suggestion",
-    "copilot",
-    "code-inference",
-    "ai-programmer",
-    "pair-programmer"
+    "Programming Languages",
+    "Machine Learning"
   ],
   "activationEvents": [
     "onCommand:extension.generateCodeSuggestion"
@@ -46,12 +43,10 @@
     }
   ],
   "scripts": {
-
     "compile": "npm run release && tsc -p ./",
     "pretest": "npm run compile && npm run lint",
     "release": "standard-version",
     "publish": "vsce login ajmal-nasumudeen && npm run release",
-    "lint": "eslint . --ext .ts,.tsx",
     "watch": "tsc -watch -p ./",
     "download-api": "vscode-dts dev",
     "postdownload-api": "vscode-dts main",
@@ -60,7 +55,6 @@
     "webpack": "webpack --mode development",
     "webpack-dev": "webpack --mode development --watch",
     "test-compile": "tsc -p ./",
-    "prebuild": "npm run lint -- --fix",
     "build": "vsce package -o ./out-vsix",
     "test": "jest"
   },
@@ -68,28 +62,29 @@
     "@types/jest": "^27.4.1",
     "@types/node": "^14.15.0",
     "@types/node-fetch": "^2.5.10",
-    "@typescript-eslint/eslint-plugin": "^4.16.0",
-    "@typescript-eslint/parser": "^4.16.0",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
     "bufferutil": "^4.0.3",
     "esbuild": "^0.12.15",
-    "eslint": "^7.21.0",
+    "eslint": "^7.32.0",
     "jest": "^27.5",
-    "node-loader": "^2.0.0",
+    "node-loader": "^2.1.0",
     "ts-jest": "^27.1.4",
-    "ts-loader": "^9.2.3",
+    "ts-loader": "^9.5.1",
     "typescript": "^4.2.2",
     "utf-8-validate": "^5.0.5",
     "vsce": "^2.15.0",
     "vscode": "^1.1.37",
     "vscode-dts": "^0.3.3",
-    "webpack": "^5.76.0",
-    "webpack-cli": "^4.7.2"
+    "webpack": "^5.97.1",
+    "webpack-cli": "^4.10.0"
   },
   "dependencies": {
     "@types/jsdom": "^16.2.12",
+    "axios": "^1.7.9",
     "canvas": "^2.11.2",
     "jsdom": "^16.6.0",
-    "linkedom": "^0.11.1",
+    "linkedom": "^0.11.2",
     "node-fetch": "^2.6.1",
     "openai": "^4.32.0",
     "typescript-language-server": "^0.5.4"
