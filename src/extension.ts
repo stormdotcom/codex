@@ -2,6 +2,26 @@ import axios from 'axios';
 import * as vscode from 'vscode';
 
 /**
+ * Fetches a code suggestion from the backend API based on the user's selected text.
+ * @param userCode The selected text in the editor.
+ * @param languageId The language of the editor (used for better context in the suggestion).
+ * @returns The suggested code or null if no suggestion is generated.
+ */
+async function fetchCodeSuggestion(userCode: string, languageId: string): Promise<string | null> {
+    try {
+        const response = await axios.post('http://localhost:8000/code-suggestions', {
+            input: userCode,
+            language: languageId,
+        });
+
+        return response.data.suggestion || null;
+    } catch (error) {
+        console.error('Error fetching suggestion:', error);
+        throw new Error('Failed to fetch suggestion from the server.');
+    }
+}
+
+/**
  * Generates a code suggestion based on the selected text in the editor.
  */
 async function generateCodeSuggestion(): Promise<void> {
@@ -19,12 +39,10 @@ async function generateCodeSuggestion(): Promise<void> {
         return;
     }
 
-    // Call the API
+    // Show a loading message while fetching the suggestion
+    const loadingMessage = vscode.window.setStatusBarMessage('Fetching AI suggestion...');
     try {
-        const response = await axios.post('http://localhost:8000/code-suggestions', {
-            input: userCode,
-        });
-        const suggestion = response.data.suggestion;
+        const suggestion = await fetchCodeSuggestion(userCode, editor.document.languageId);
 
         if (suggestion) {
             // Display the suggestion in a new editor tab
@@ -36,9 +54,11 @@ async function generateCodeSuggestion(): Promise<void> {
         } else {
             vscode.window.showInformationMessage('No suggestion generated.');
         }
-    } catch (error) {
-        console.error('Error fetching suggestion:', error);
-        vscode.window.showErrorMessage('Error fetching suggestion. Check your server and try again.');
+    } catch (error: any) {
+        vscode.window.showErrorMessage(error.message);
+    } finally {
+        // Clear the loading message
+        loadingMessage.dispose();
     }
 }
 
