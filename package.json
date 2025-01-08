@@ -7,11 +7,11 @@
     "type": "git",
     "url": "https://github.com/stormdotcom/codex-extention.git"
   },
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.96.0"
   },
-  "icon": "assets/logo.png",
+  "icon": "assets/logo128.png",
   "categories": [
     "AI",
     "Chat"
@@ -28,11 +28,12 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
+    "compile": "npm run release && tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src",
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "release": "standard-version"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
@@ -43,6 +44,7 @@
     "@vscode/test-cli": "^0.0.10",
     "@vscode/test-electron": "^2.4.1",
     "eslint": "^9.16.0",
+    "standard-version": "^9.5.0",
     "typescript": "^5.7.2"
   },
   "dependencies": {
